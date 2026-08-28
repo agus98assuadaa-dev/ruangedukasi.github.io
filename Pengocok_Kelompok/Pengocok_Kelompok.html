@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengocok Kelompok Siswa - Ruang Edukasi</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f6f9; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h1 { color: #1a73e8; text-align: center; margin-bottom: 5px; font-size: 24px; }
+        p.subtitle { text-align: center; color: #666; margin-bottom: 25px; font-size: 14px; }
+        
+        .form-group { margin-bottom: 20px; }
+        label { font-weight: bold; display: block; margin-bottom: 8px; color: #2c3e50; }
+        textarea { width: 100%; height: 160px; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-family: inherit; font-size: 14px; resize: vertical; }
+        textarea:focus, input:focus { border-color: #1a73e8; outline: none; }
+        
+        .control-panel { display: flex; gap: 15px; align-items: center; flex-wrap: wrap; margin-bottom: 25px; }
+        .input-number { width: 120px; padding: 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 14px; }
+        
+        .btn { padding: 12px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; transition: 0.2s; }
+        .btn-primary { background: #1a73e8; color: white; flex: 1; }
+        .btn-primary:hover { background: #1557b0; }
+        .btn-secondary { background: #28a745; color: white; display: none; }
+        .btn-secondary:hover { background: #218838; }
+        
+        #result-container { margin-top: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 15px; }
+        .group-card { background: #f8f9fa; border: 2px solid #e9ecef; border-top: 4px solid #1a73e8; border-radius: 8px; padding: 15px; }
+        .group-card h3 { margin: 0 0 10px 0; color: #1a73e8; font-size: 16px; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+        .group-card ol { margin: 0; padding-left: 20px; font-size: 14px; }
+        .group-card li { margin-bottom: 4px; }
+        
+        /* Shuffling animation effect */
+        .shuffling { opacity: 0.5; pointer-events: none; }
+        footer { text-align: center; margin-top: 30px; font-size: 13px; color: #777; border-top: 1px solid #eee; padding-top: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎲 Pengocok Kelompok Siswa</h1>
+    <p class="subtitle">Media Pembelajaran Interaktif & Pembagi Kelompok Otomatis</p>
+
+    <div class="form-group">
+        <label for="student-names">Daftar Nama Siswa (Paste 1 nama per baris):</label>
+        <textarea id="student-names" placeholder="Contoh:&#10;Ahmad&#10;Budi&#10;Citra&#10;Dewi&#10;Eko"></textarea>
+    </div>
+
+    <div class="control-panel">
+        <div>
+            <label for="group-count">Jumlah Kelompok:</label>
+            <input type="number" id="group-count" class="input-number" min="1" value="4">
+        </div>
+        <button class="btn btn-primary" onclick="shuffleGroups()">🎲 Kocok & Bagi Kelompok</button>
+        <button id="copy-btn" class="btn btn-secondary" onclick="copyResults()">📋 Copy Hasil</button>
+    </div>
+
+    <div id="result-container"></div>
+
+    <footer>
+        &copy; 2026 Developed by <strong>Agus Riyadi, S.Kom., Gr.</strong> | Ruang Edukasi
+    </footer>
+</div>
+
+<script>
+    function shuffleGroups() {
+        const rawNames = document.getElementById('student-names').value;
+        const groupCount = parseInt(document.getElementById('group-count').value);
+        const container = document.getElementById('result-container');
+        const copyBtn = document.getElementById('copy-btn');
+
+        // Clean & Filter empty lines
+        let names = rawNames.split('\n').map(n => n.trim()).filter(n => n.length > 0);
+
+        if (names.length === 0) {
+            alert('Silakan masukkan nama-nama siswa terlebih dahulu!');
+            return;
+        }
+
+        if (isNaN(groupCount) || groupCount < 1) {
+            alert('Jumlah kelompok harus minimal 1!');
+            return;
+        }
+
+        // Add visual effect
+        container.classList.add('shuffling');
+        container.innerHTML = '<p style="text-align:center; grid-column: 1/-1;">🎲 Mengocok nama siswa...</p>';
+
+        setTimeout(() => {
+            // Fisher-Yates Shuffle Algorithm
+            for (let i = names.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [names[i], names[j]] = [names[j], names[i]];
+            }
+
+            // Distribute evenly (Round Up / Ceiling distribution)
+            const groups = Array.from({ length: Math.min(groupCount, names.length) }, () => []);
+            names.forEach((name, index) => {
+                groups[index % groups.length].push(name);
+            });
+
+            // Render Results
+            container.innerHTML = '';
+            groups.forEach((group, idx) => {
+                let cardHtml = `
+                    <div class="group-card">
+                        <h3>Kelompok ${idx + 1} (${group.length} Siswa)</h3>
+                        <ol>
+                `;
+                group.forEach(student => {
+                    cardHtml += `<li>${student}</li>`;
+                });
+                cardHtml += `</ol></div>`;
+                container.innerHTML += cardHtml;
+            });
+
+            container.classList.remove('shuffling');
+            copyBtn.style.display = 'inline-block';
+        }, 400); // 400ms delay for shuffle feel
+    }
+
+    function copyResults() {
+        const cards = document.querySelectorAll('.group-card');
+        if (cards.length === 0) return;
+
+        let textOutput = "*HASIL PEMBAGIAN KELOMPOK*\n\n";
+        cards.forEach(card => {
+            const title = card.querySelector('h3').innerText;
+            textOutput += `*${title}*\n`;
+            const items = card.querySelectorAll('li');
+            items.forEach((item, i) => {
+                textOutput += `${i + 1}. ${item.innerText}\n`;
+            });
+            textOutput += "\n";
+        });
+
+        navigator.clipboard.writeText(textOutput).then(() => {
+            alert('Hasil kelompok berhasil disalin ke clipboard! Siap di-paste ke WhatsApp.');
+        });
+    }
+</script>
+
+</body>
+</html>

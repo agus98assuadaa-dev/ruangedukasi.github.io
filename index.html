@@ -3,35 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruang Edukasi - Portal Game Informatika</title>
+    <title>Ruang Edukasi - Portal Game & Tools Interaktif</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; margin: 0; padding: 20px; text-align: center; }
-        .container { max-width: 600px; margin: auto; }
-        .card { background: white; border-radius: 12px; padding: 20px; margin: 15px 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        h1 { color: #1a73e8; }
-        a.btn { display: inline-block; margin-top: 10px; padding: 10px 20px; background: #1a73e8; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; }
-        a.btn:hover { background: #1557b0; }
-        footer { margin-top: 30px; font-size: 0.9em; color: #555; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: #f0f4f8; 
+            color: #333; 
+            padding: 30px 20px; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .container { max-width: 680px; margin: 0 auto; width: 100%; }
+        
+        .header { text-align: center; margin-bottom: 25px; }
+        .header h1 { color: #1e3a8a; font-size: 26px; margin-bottom: 8px; }
+        .header p { color: #64748b; font-size: 15px; }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1e3a8a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 20px 0 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #cbd5e1;
+        }
+
+        .card { 
+            background: white; 
+            border-radius: 12px; 
+            padding: 18px 20px; 
+            margin-bottom: 12px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04); 
+            border: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+        }
+        .card h3 { color: #1e293b; font-size: 15px; margin-bottom: 4px; }
+        .card p.desc { color: #64748b; font-size: 13px; }
+
+        a.btn { 
+            display: inline-block; 
+            padding: 9px 16px; 
+            background: #2563eb; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            font-size: 13px;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+        a.btn:hover { background: #1d4ed8; }
+        a.btn-tool { background: #16a34a; }
+        a.btn-tool:hover { background: #15803d; }
+
+        footer { 
+            margin-top: 40px; 
+            padding-top: 20px; 
+            border-top: 1px solid #cbd5e1; 
+            font-size: 13px; 
+            color: #64748b; 
+            text-align: center;
+        }
+        .footer-links { margin-bottom: 10px; }
+        .footer-links a { 
+            color: #2563eb; 
+            text-decoration: none; 
+            margin: 0 10px; 
+            font-weight: 600;
+        }
+        .footer-links a:hover { text-decoration: underline; }
+
+        @media (max-width: 480px) {
+            .card { flex-direction: column; align-items: flex-start; gap: 12px; }
+            a.btn { width: 100%; text-align: center; }
+        }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>Portal Game Edukasi Informatika</h1>
-        <p>Silakan pilih game pembelajaran di bawah ini:</p>
+        <div class="header">
+            <h1>🎮 Ruang Edukasi</h1>
+            <p>Portal Media Pembelajaran Interaktif & Alat Bantu Pembelajaran</p>
+        </div>
+
+        <!-- Bagian Tools Pembelajaran -->
+        <div class="section-title">🛠️ Alat Bantu Pembelajaran</div>
 
         <div class="card">
-            <h3>Game 1: Algoritma Labirin Robot</h3>
+            <div>
+                <h3>🎲 Pengocok Kelompok Siswa</h3>
+                <p class="desc">Pembagi kelompok otomatis & acak dengan fitur ekspor ke WA[cite: 3].</p>
+            </div>
+            <a class="btn btn-tool" href="Pengocok_Kelompok/Pengocok_Kelompok.html">Buka Alat</a>
+        </div>
+
+        <!-- Bagian Game Edukasi -->
+        <div class="section-title">🎮 Game Edukasi Interaktif</div>
+
+        <!-- Game 1 -->
+        <div class="card">
+            <div>
+                <h3>Game 1: Algoritma Labirin Robot</h3>
+                <p class="desc">Latihan pemrograman dasar & logika alur perintah robot.</p>
+            </div>
             <a class="btn" href="Algoritma_Labirin_Robot/G_Algoritma_Labirin_Robot_obfs.html">Mainkan Game</a>
         </div>
 
+        <!-- Game 2 -->
         <div class="card">
-            <h3>Game 2: Algoritma Outing (Greedy & Dinamis)</h3>
+            <div>
+                <h3>Game 2: Algoritma Outing</h3>
+                <p class="desc">Simulasi penguasaan strategi Greedy & Dinamis.</p>
+            </div>
             <a class="btn" href="Algoritma_Outing_Greedy_Dinamis/G_Algoritma_Outing_obfs.html">Mainkan Game</a>
         </div>
 
-        <footer>
-            &copy; 2026 Developed by <strong>Agus Riyadi, S.Kom., Gr.</strong> | Ruang Edukasi
-        </footer>
+        <!-- Game 3 -->
+        <div class="card">
+            <div>
+                <h3>Game 3: English Word Quest</h3>
+                <p class="desc">Pencarian 500 kosa kata bahasa Inggris berbasis matriks.</p>
+            </div>
+            <a class="btn" href="English_Word_Quest/G_EnglishWordQuest_obfs.html">Mainkan Game</a>
+        </div>
     </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="about-us.html">Tentang Kami</a> | 
+            <a href="privacy-policy.html">Kebijakan Privasi</a>
+        </div>
+        <div>
+            &copy; 2026 Developed by <strong>Agus Riyadi, S.Kom., Gr.</strong> | Ruang Edukasi[cite: 3]
+        </div>
+    </footer>
+
 </body>
 </html>
