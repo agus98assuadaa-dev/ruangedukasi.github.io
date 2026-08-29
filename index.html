@@ -104,63 +104,6 @@
       background-color: #1d4ed8;
     }
 
-    /* Modal / Pop-up Styling */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 1000;
-    }
-
-    .modal-content {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      max-width: 600px;
-      width: 100%;
-      max-height: 80vh;
-      overflow-y: auto;
-      position: relative;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    }
-
-    .modal-content h2 {
-      margin-bottom: 15px;
-      color: #1e3a8a;
-    }
-
-    .modal-content p, .modal-content ul {
-      font-size: 0.95rem;
-      color: #475569;
-      line-height: 1.6;
-      margin-bottom: 15px;
-    }
-
-    .modal-content ul {
-      padding-left: 20px;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 24px;
-      font-weight: bold;
-      color: #64748b;
-      cursor: pointer;
-    }
-
-    .close-btn:hover {
-      color: #0f172a;
-    }
-
     footer {
       background-color: #ffffff;
       border-top: 1px solid #e2e8f0;
@@ -249,60 +192,13 @@
     </div>
   </div>
 
-  <!-- Modal About Us -->
-  <div id="modalAbout" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('modalAbout')">&times;</span>
-      <h2>Tentang Kami (About Us)</h2>
-      <p>Selamat datang di <strong>Ruang Edukasi</strong>!</p>
-      <p>Ruang Edukasi adalah platform portal media pembelajaran digital interaktif yang dirancang khusus untuk mendukung proses belajar-mengajar yang lebih menyenangkan, efektif, dan berbasis teknologi.</p>
-      <p>Aplikasi dan game edukasi di platform ini dikembangkan secara independen sebagai wujud komitmen dalam menghadirkan inovasi pembelajaran di era digital.</p>
-    </div>
-  </div>
-
-  <!-- Modal Privacy Policy -->
-  <div id="modalPrivacy" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('modalPrivacy')">&times;</span>
-      <h2>Kebijakan Privasi (Privacy Policy)</h2>
-      <p>Privasi Anda sangat penting bagi kami. Kebijakan ini menjelaskan bagaimana kami mengelola informasi pada aplikasi di platform Ruang Edukasi:</p>
-      <ul>
-        <li><strong>Pengumpulan Data:</strong> Aplikasi di portal ini bersifat edukatif dan tidak mengumpulkan, menyimpan, atau membagikan informasi pribadi milik pengguna.</li>
-        <li><strong>Penyimpanan Lokal:</strong> Beberapa game atau alat mungkin menyimpan progres permainan atau pengaturan secara lokal di perangkat Anda (LocalStorage) tanpa mengirimkannya ke server eksternal.</li>
-        <li><strong>Hak Pengguna:</strong> Pengguna dapat bebas menggunakan seluruh aplikasi tanpa harus melakukan pendaftaran atau memberikan data pribadi.</li>
-      </ul>
-      <p>Jika ada pertanyaan mengenai kebijakan privasi ini, Anda dapat menghubungi pengembang melalui repositori resmi.</p>
-    </div>
-  </div>
-
   <footer>
     <div class="footer-links">
-      <a href="javascript:void(0)" onclick="openModal('modalAbout')">About Us</a> | 
-      <a href="javascript:void(0)" onclick="openModal('modalPrivacy')">Privacy Policy</a>
+      <a href="./about-us.html">About Us</a> | 
+      <a href="./privacy-policy.html">Privacy Policy</a>
     </div>
     <p>&copy; 2026 Developed by <strong>Agus Riyadi, S.Kom., Gr.</strong> | Ruang Edukasi</p>
   </footer>
-
-  <script>
-    function openModal(id) {
-      document.getElementById(id).style.display = 'flex';
-    }
-
-    function closeModal(id) {
-      document.getElementById(id).style.display = 'none';
-    }
-
-    window.onclick = function(event) {
-      const modalAbout = document.getElementById('modalAbout');
-      const modalPrivacy = document.getElementById('modalPrivacy');
-      if (event.target === modalAbout) {
-        modalAbout.style.display = 'none';
-      }
-      if (event.target === modalPrivacy) {
-        modalPrivacy.style.display = 'none';
-      }
-    }
-  </script>
 
 </body>
 </html>
